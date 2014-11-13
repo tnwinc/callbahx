@@ -8,6 +8,8 @@ HUGE portions of this code were lifted, with permission, from [dionjwa/haxe_remo
 
 In particular, `ExternalAsyncConnection`, `Macros`, and `RemotingUtility` were lifted and tweaked.
 
+Additionally, rather than take a dependency on the entire [aduros/flambe](https://github.com/aduros/flambe) project, I've lifted a bit of code into this project as well. Thanks to aduros as well.
+
 # Try it Out
 
 There is a sample provided. First, note that you'll need to add the path (or parent, or grandparent, or great-grandparent, etc.) to the Flash Developer Tools > Trusted Location Settings... Then run `haxe sample.hxml` in the project directory. You'll want to have Developer Tools open in your browser to see the debug console output from the JS side of the world.
