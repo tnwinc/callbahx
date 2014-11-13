@@ -1,0 +1,15 @@
+-main JsMain
+-cp src
+-cp sample
+-D server
+-js Build/sample.js
+
+--next
+
+-main FlashMain
+-cp src
+-cp sample
+-D client
+-swf Build/sample.swf
+-cmd open Build/index.html
+

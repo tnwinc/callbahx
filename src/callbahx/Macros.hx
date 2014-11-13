@@ -7,7 +7,6 @@ import haxe.macro.Type;
 import haxe.macro.Context;
 import haxe.macro.Compiler;
 
-using Lambda;
 using StringTools;
 
 /**

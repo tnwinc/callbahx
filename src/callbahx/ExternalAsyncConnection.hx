@@ -89,7 +89,7 @@ class ExternalAsyncConnection implements AsyncConnection
         var data = null;
         #if flash
         try {
-            data = flash.external.ExternalInterface.call("tnw.remoting.ExternalAsyncConnection.doCall",__data.name,__path.join("."),params, callbackHash);
+            data = flash.external.ExternalInterface.call("callbahx.ExternalAsyncConnection.doCall",__data.name,__path.join("."),params, callbackHash);
         } catch (e :Dynamic) {
             trace("Error calling __data.name=" + __data.name + ", path=" + __path.join(".") + ", params=" + params + "\ne=" + e);
             if (_errorHandler != null) {
@@ -129,7 +129,7 @@ class ExternalAsyncConnection implements AsyncConnection
                 var s = new haxe.Serializer();
                 s.serialize(ret);
                 #if flash
-                    flash.external.ExternalInterface.call("tnw.remoting.ExternalAsyncConnection.doCallback", cnx.__data.name, callbackId, escapeString(s.toString()));
+                    flash.external.ExternalInterface.call("callbahx.ExternalAsyncConnection.doCallback", cnx.__data.name, callbackId, escapeString(s.toString()));
                 #elseif js
                     var fobj : Dynamic = untyped window.document[cnx.__data.flash];
                     if( fobj == null ) fobj = untyped window.document.getElementById(cnx.__data.flash);
