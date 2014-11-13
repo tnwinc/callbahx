@@ -8,7 +8,7 @@ HUGE portions of this code were lifted, with permission, from [dionjwa/haxe_remo
 
 In particular, `ExternalAsyncConnection`, `Macros`, and `RemotingUtility` were lifted and tweaked.
 
-Additionally, rather than take a dependency on the entire [aduros/flambe](https://github.com/aduros/flambe) project, I've lifted a bit of code into this project as well. Thanks to aduros as well.
+Additionally, rather than take a dependency on the entire [aduros/flambe](https://github.com/aduros/flambe) project, I've lifted a bit of code into this project as well in the `Macros` file. Thanks to aduros as well.
 
 # Try it Out
 
