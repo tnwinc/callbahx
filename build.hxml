@@ -1,0 +1,13 @@
+-main callbahx.Main
+-cp src
+-cp test
+-D server
+-js Build/remoting.js
+
+--next
+
+-main callbahx.Main
+-cp src
+-cp test
+-D client
+-swf Build/remoting.swf
