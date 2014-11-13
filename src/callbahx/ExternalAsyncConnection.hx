@@ -169,7 +169,7 @@ class ExternalAsyncConnection implements AsyncConnection
 
     #if flash
 
-    public static function jsConnect( name : String, ?ctx : Context ) : ExternalAsyncConnection {
+    public static function jsConnect( name : String, ctx : Context ) : ExternalAsyncConnection {
         if( !flash.external.ExternalInterface.available )
             throw "External Interface not available";
         #if flash9
@@ -186,7 +186,7 @@ class ExternalAsyncConnection implements AsyncConnection
 
     #elseif js
 
-    public static function flashConnect( name : String, flashObjectID : String, ?ctx : Context ) {
+    public static function flashConnect( name : String, flashObjectID : String, ctx : Context ) {
         var cnx = new ExternalAsyncConnection({ ctx : ctx, name : name, flash : flashObjectID },[]);
         connections.set(name,cnx);
         return cnx;
