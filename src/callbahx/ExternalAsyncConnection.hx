@@ -43,17 +43,17 @@ class ExternalAsyncConnection implements AsyncConnection
         _errorHandler = null;
     }
 
-    public function setErrorHandler (handler :Dynamic->Void) :Void
+    public function setErrorHandler(handler :Dynamic->Void) :Void
     {
         _errorHandler = handler;
     }
 
     #if flash9
-    static function escapeString( s : String ) {
+    static function escapeString(s:String) {
         return s.split("\\").join("\\\\");
     }
     #elseif flash
-    static function escapeString( s : String ) {
+    static function escapeString(s:String) {
         return s.split("\\").join("\\\\").split("&").join("&amp;");
     }
     #else
@@ -62,8 +62,7 @@ class ExternalAsyncConnection implements AsyncConnection
     }
     #end
 
-    public function call( params : Array<Dynamic>, ?onResult :Null<Dynamic>->Void ) : Void
-    {
+    public function call(params:Array<Dynamic>, ?onResult:Null<Dynamic>->Void):Void {
         var callbackHash = ExternalAsyncConnection._callbackHash++;
         if (onResult != null) {
             //Store the callback, and set a timeout for the callback
@@ -119,13 +118,13 @@ class ExternalAsyncConnection implements AsyncConnection
 
     static var connections = new Map<String, ExternalAsyncConnection>();
 
-    static function doCall( name : String, path : String, params : String, callbackId :Int ) : Void {
+    static function doCall(name:String, path:String, params:String, callbackId:Int):Void {
         try {
             var cnx = connections.get(name);
-            if( cnx == null ) throw 'Unknown connection : ${name}';
-            if( cnx.__data.ctx == null ) throw 'No context shared for connection: ${name}';
+            if(cnx == null) throw 'Unknown connection : ${name}';
+            if(cnx.__data.ctx == null) throw 'No context shared for connection: ${name}';
             var params :Array<Dynamic> = new haxe.Unserializer(params).unserialize();
-            params.push(function (?ret :Null<Dynamic>) :Void {
+            params.push(function(?ret :Null<Dynamic>):Void {
                 var s = new haxe.Serializer();
                 s.serialize(ret);
                 #if flash
@@ -133,8 +132,8 @@ class ExternalAsyncConnection implements AsyncConnection
                 #elseif js
                     var fobj : Dynamic = untyped window.document[cnx.__data.flash];
                     if( fobj == null ) fobj = untyped window.document.getElementById(cnx.__data.flash);
-                    if( fobj == null ) throw "Could not find flash object '"+cnx.__data.flash+"'";
-                    try fobj.externalRemotingCallback(cnx.__data.name, callbackId, s.toString()+"#") catch( e : Dynamic ) {trace(e);};
+                    if( fobj == null ) throw 'Could not find flash object "${cnx.__data.flash}"';
+                    try fobj.externalRemotingCallback(cnx.__data.name, callbackId, s.toString()+"#") catch(e:Dynamic) {trace(e);};
                 #end
             });
             #if flash
@@ -142,18 +141,18 @@ class ExternalAsyncConnection implements AsyncConnection
             #elseif js
 
             //Call later, so flash doesn't hang
-            var f = function () :Void {
+            var f = function():Void {
                 cnx.__data.ctx.call(path.split("."), params);
             }
             untyped __js__("setTimeout(f, 0)");
             #end
-        } catch( e : Dynamic ) {
+        } catch(e:Dynamic) {
             trace('ERROR: ${e}');
             throw e;
         }
     }
 
-    static function doCallback(name :String, callbackId :Int, data :String) : Void {
+    static function doCallback(name:String, callbackId:Int, data:String):Void {
         var cnx = connections.get(name);
         if( cnx == null ) throw 'Unknown connection : ${name}';
         if( cnx.__data.ctx == null ) throw 'No context shared for connection: ${name}';
@@ -169,7 +168,7 @@ class ExternalAsyncConnection implements AsyncConnection
 
     #if flash
 
-    public static function jsConnect( name : String, ctx : Context ) : ExternalAsyncConnection {
+    public static function jsConnect(name:String, ctx:Context):ExternalAsyncConnection {
         if( !flash.external.ExternalInterface.available )
             throw "External Interface not available";
         #if flash9
@@ -186,12 +185,11 @@ class ExternalAsyncConnection implements AsyncConnection
 
     #elseif js
 
-    public static function flashConnect( name : String, flashObjectID : String, ctx : Context ) {
-        var cnx = new ExternalAsyncConnection({ ctx : ctx, name : name, flash : flashObjectID },[]);
+    public static function flashConnect(name:String, flashObjectID:String, ctx:Context) {
+        var cnx = new ExternalAsyncConnection({ctx:ctx, name:name, flash:flashObjectID},[]);
         connections.set(name,cnx);
         return cnx;
     }
 
     #end
-
 }

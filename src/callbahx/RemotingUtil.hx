@@ -12,10 +12,9 @@ class RemotingUtil
      * 'FooManager' will become 'fooService'.
      * 'MyClass' will become 'myClassService'.
      * 'SomeService' will become 'someService'.
-     * @managerClassName The class name of the class built with @:build(transition9.remoting.Macros    .remotingClass())
+     * @managerClassName The class name of the class built with @:build(callbahx.Macros.remotingClass())
      */
-    public static function getRemotingIdFromManagerClassName (managerClassName :String) :String
-    {
+    public static function getRemotingIdFromManagerClassName(managerClassName:String):String {
         //Removes any instances of "Manager" or "Service" and appends "Service".
         //E.g. "PlayerDataManager" would become "PlayerDataService"
         //E.g. "TestThing" would become "TestThingService"
