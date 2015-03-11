@@ -125,6 +125,9 @@ class ExternalAsyncConnection implements AsyncConnection
             if(cnx.__data.ctx == null) throw 'No context shared for connection: ${name}';
             var params :Array<Dynamic> = new haxe.Unserializer(params).unserialize();
             params.push(function(?ret :Null<Dynamic>):Void {
+                #if js
+                ret = haxe.Json.parse(haxe.Json.stringify(ret));
+                #end
                 var s = new haxe.Serializer();
                 s.serialize(ret);
                 #if flash
