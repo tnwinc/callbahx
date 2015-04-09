@@ -4,7 +4,7 @@
   "license": "MIT",
   "tags": ["remoting", "callbacks", "flash", "js"],
   "description": "Use Haxe remoting to communicate from Flash-land to JS-land. But with callbacks!",
-  "version": "0.0.2-alpha",
+  "version": "0.0.3-alpha",
   "releasenote": "",
   "contributors": ["brendanjerwin"],
   "classPath" : "src"

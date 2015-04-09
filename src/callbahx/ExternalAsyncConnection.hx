@@ -13,7 +13,7 @@ import haxe.remoting.Context;
 @:expose
 class ExternalAsyncConnection implements AsyncConnection
 {
-    public static var CALLBACK_TIMEOUT_MS = 2000;
+    public static var CALLBACK_TIMEOUT_MS = 30000;
 
     public static function main() {}
 
